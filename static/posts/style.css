@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    background-color: silver;
     text-decoration: none;
 }
 
@@ -13,6 +12,7 @@ h1 {
 }
 
 .post {
+    background-color: cyan;
     border: 3px solid black;
     border-radius: 3px;
     margin: 10px;
