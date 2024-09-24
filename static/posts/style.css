@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    background-color: silver;
+    text-decoration: none;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.post {
+    border: 3px solid black;
+    border-radius: 3px;
+    margin: 10px;
+    max-width: 600px;
+    max-height: 200px;
+}
+
+.post h2, .post p {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    margin-left: 10px;
+}

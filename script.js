@@ -7,6 +7,9 @@ const app = express()
 const PORT = 8000
 const HOST = "localhost"
 
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'templates'))
+
 app.use('/static/', express.static(path.join(__dirname, 'static'))) 
 
 function GetDate() {
@@ -14,7 +17,18 @@ function GetDate() {
 };
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "./templates/index.html"))
+  res.render("index")
+});
+
+app.get("/posts", (req, res) => {
+  const context = {
+    posts: [
+      { author: "Andrey", text: "Hello world!" },
+      { author: "Olexey", text: "Hello world!" },
+      { author: "Vasya", text: "Hello world!" },
+    ]
+  }
+  res.render("posts", context)
 });
 
 app.get("/date", (req, res) => {
