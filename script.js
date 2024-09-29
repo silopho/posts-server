@@ -20,6 +20,10 @@ app.get("/", (req, res) => {
   res.render("index")
 });
 
+app.get("/date", (req, res) => {
+  GetDate()
+});
+
 app.get("/posts", (req, res) => {
   const context = {
     posts: [
@@ -31,10 +35,10 @@ app.get("/posts", (req, res) => {
   res.render("posts", context)
 });
 
-app.get("/date", (req, res) => {
-  GetDate()
+app.get("/user", (req, res) => {
+  console.log("Хтось зайшов на сторінку користувачів")
+  res.render("user")
 });
-
 app.listen(PORT, HOST, () => {
   console.log(`Server is running on http://${HOST}:${PORT}`);
 });
