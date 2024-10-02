@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.post %></title>
+    <link rel="stylesheet" href="/static/post/style.css">
+    <script src="/static/post/script.js"></script>
+</head>
+<body>
+    <div class="post">
+        <h1><%= post.post %></h1>
+        <p style="font-size: 20px;"><%= post.description %></p>
+        <div class="post-info">
+            <p style="font-weight: bold;"><%= post.author %></p>
+            <p><%= post.text %></p>
+            <p><%= post.time %></p>
+            <a href="/posts">Return to list of posts</a>
+        </div>
+    </div>
+</body>
+</html>

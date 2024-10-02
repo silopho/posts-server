@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 500px;
+    max-width: 500px;
+    height: 90%;
+    margin: 2%;
+    padding: 10px;
+    border: 3px solid black;
+    border-radius: 3px;
+    background-color: rgb(214, 214, 214);
+}
+
+.post-info {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    bottom: 0;
+    display: flex;
+}

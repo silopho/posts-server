@@ -3,18 +3,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts</title>
-    <link rel="stylesheet" href="static/posts/style.css">
-    <script src="static/posts/script.js"></script>
+    <link rel="stylesheet" href="/static/posts/style.css">
+    <script src="/static/posts/script.js"></script>
 </head>
 <body>
     <h1>Posts</h1>
     <div class="posts">
-        <% posts.forEach((post) => {%>
+        <% posts.forEach((post) => { %>
         <div class="post">
-            <h2><%= post.author %></h2>
-            <p><%= post.text %></p>
+            <a href="/post/<%= post.id %>">
+                <h2><%= post.author %></h2>
+                <p><%= post.post %></p>
+                <p><%= post.time %></p>
+            </a>
         </div>
         <% }) %>
     </div>
+    <a href="/" id="back">Main page</a>
 </body>
 </html>

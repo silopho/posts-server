@@ -1,3 +1,3 @@
-window.onbeforeunload = function(){
-    return 'Ви точно хочете покинути данну сторінку?';
-}
+// window.onbeforeunload = function(){
+//     return 'Ви точно хочете покинути данну сторінку?';
+// }
