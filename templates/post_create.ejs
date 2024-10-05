@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create post</title>
+    <link rel="stylesheet" href="/static/post_create/style.css">
+    <script src="/static/post_create/script.js" defer></script>
+</head>
+<body>
+    <div>
+        <h1>Створити пост</h1>
+        <form action="/post/create" method="POST">
+            <div id="div-author">
+                <p>Автор:</p>
+                <input type="text" id="author" name="author">
+            </div>
+            <div id="div-post">
+                <p>Коротка назва посту:</p>
+                <textarea id="post" name="post" rows="4" cols="50"></textarea>
+            </div>
+            <div id="div-text">
+                <p>Опис:</p>
+                <textarea id="text" name="description" rows="4" cols="50"></textarea>
+            </div>
+            <p><input id="button "type="button" value="Створити"></p>
+        </form>
+        <a href="/">На головну сторінку</a>
+    </div>
+</body>
+</html>
