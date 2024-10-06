@@ -71,8 +71,9 @@ app.get("/post/:id", (req, res) => {
 
 app.post("/post/create", (req, res) => {
   const data = req.body
-  products.push(data)
-  res.send('+send');
+  console.log(data.posts)
+  posts.push(data)
+  res.send('send');
 });
 
 app.get("/user", (req, res) => {
