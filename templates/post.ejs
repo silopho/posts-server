@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= post.post %></title>
     <link rel="stylesheet" href="/static/post/style.css">
-    <script src="/static/post/script.js"></script>
+    <script src="/static/post/script.js" defer></script>
 </head>
 <body>
     <div class="post">
@@ -14,8 +14,8 @@
             <p style="font-weight: bold;"><%= post.author %></p>
             <p><%= post.text %></p>
             <p><%= post.time %></p>
-            <a href="/posts">Return to list of posts</a>
-        </div>
+            <a href="/posts">Повернутися до постів</a>
+        </div
     </div>
 </body>
 </html>
