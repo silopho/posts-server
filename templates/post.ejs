@@ -9,12 +9,11 @@
 <body>
     <div class="post">
         <h1><%= post.post %></h1>
-        <p style="font-size: 20px;"><%= post.description %></p>
+        <p style="font-size: 20px;"><%= post.text %></p>
         <div class="post-info">
             <p style="font-weight: bold;"><%= post.author %></p>
-            <p><%= post.text %></p>
-            <p><%= post.time %></p>
-            <a href="/posts">Повернутися до постів</a>
+            <p><%= post.date %></p>
+            <a href="/post/all">Повернутися до постів</a>
         </div
     </div>
 </body>
