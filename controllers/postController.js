@@ -7,14 +7,14 @@ function getAllPosts(req, res) {
 
 function getPostById(req, res) {
     const id = req.params.id
-    const context = postService.getPostById(id).context
+    const context = postService.getPostById(id)
     if (id <= postService.posts.length && id >= 1){
         res.render("post", context)
       } else if (id == "create"){
         res.render("post_create")
       } else {
         res.send("This page does not exist")
-      }
+      };
 };
 
 function createPost(req, res) {

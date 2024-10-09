@@ -12,8 +12,8 @@
         <% posts.forEach((post) => { %>
         <div class="post">
             <a href="/post/<%= post.id %>">
-                <h2><%= post.author %></h2>
-                <p><%= post.post %></p>
+                <h3><%= post.post %></h2>
+                <p><%= post.author %></p>
                 <p><%= post.time %></p>
             </a>
         </div>

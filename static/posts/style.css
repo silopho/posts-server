@@ -28,7 +28,7 @@ h1 {
     max-height: 200px;
 }
 
-.post h2, .post p {
+.post h3, .post p {
     margin: 5px;
     margin-left: 10px;
 }

@@ -37,10 +37,10 @@ function getAllPosts() {
 };
 
 function getPostById(id) {
-    const context = {
-        posts: posts[id-1]
-    }
-    return context
+  const context = {
+      post: posts[id-1]
+  };
+  return context;
 };
 
 function createPost (data) {
