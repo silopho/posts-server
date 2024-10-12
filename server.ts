@@ -1,18 +1,16 @@
-const express = require("express")
-const moment = require("moment")
-const path = require("path")
-const postRouter = require("./routers/postRouter")
+import express, { Express, Request, Response } from 'express';
+import { router as postRouter } from './routers/postRouter'
 
-const app = express()
+const app: Express = express()
 
 const PORT = 8000
 const HOST = "localhost"
 
 app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, 'templates'))
+app.set('views', './templates')
 
 app.use(express.json()) 
-app.use('/static/', express.static(path.join(__dirname, 'static')))
+app.use('/static/', express.static('./static/'))
 
 app.use('/post', postRouter)
 
@@ -27,5 +25,3 @@ app.get("/user", (req, res) => {
 app.listen(PORT, HOST, () => {
   console.log(`Server is running on http://${HOST}:${PORT}`);
 });
-
-module.exports = moment
