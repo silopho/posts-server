@@ -20,6 +20,7 @@ function getPostById(req: Request, res: Response) {
 
 function createPost(req: Request, res: Response) {
     const data = req.body
+    data.id = posts.length + 1
     createPostService(data)
     res.send('send');
 }
