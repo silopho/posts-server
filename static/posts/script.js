@@ -1,5 +1,4 @@
 const button = document.querySelector('#button');
-let postId = 5
 
 button.addEventListener('click', () => {
 
@@ -10,7 +9,7 @@ button.addEventListener('click', () => {
     fetch('/post/create', {
         method: 'POST',
         body: JSON.stringify({
-            id: postId,
+            id: "",
             post: post,
             text: text,
             author: author,
@@ -20,5 +19,4 @@ button.addEventListener('click', () => {
             'Content-Type': 'application/json'
         }
     })
-    postId += 1;
 })
