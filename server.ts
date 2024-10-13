@@ -1,25 +1,25 @@
 import express, { Express, Request, Response } from 'express';
-import { router as postRouter } from './routers/postRouter'
+import { router as postRouter } from './routers/postRouter';
 
-const app: Express = express()
+const app: Express = express();
 
-const PORT = 8000
-const HOST = "localhost"
+const PORT = 8000;
+const HOST = "localhost";
 
-app.set('view engine', 'ejs')
-app.set('views', './templates')
+app.set('view engine', 'ejs');
+app.set('views', './templates');
 
-app.use(express.json()) 
-app.use('/static/', express.static('./static/'))
+app.use(express.json());
+app.use('/static/', express.static('./static/'));
 
-app.use('/post', postRouter)
+app.use('/post', postRouter);
 
-app.get("/", (req, res) => {
-  res.render("index")
+app.get("/", (req: Request, res: Response) => {
+  res.render("index");
 });
 
-app.get("/user", (req, res) => {
-  res.render("user")
+app.get("/user", (req: Request, res: Response) => {
+  res.render("user");
 });
 
 app.listen(PORT, HOST, () => {
