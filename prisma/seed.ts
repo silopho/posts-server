@@ -132,17 +132,27 @@ async function deleteComment() {
 }
 
 async function deletePost() {
-    await prisma.comment.deleteMany({
+    await prisma.comment.deleteMany({})
+    await prisma.post.delete({
         where: {
-            postId: 1
-        }
-    });
-    const post = await prisma.post.delete({
-        where: {
-            id: 1
+            id: 5
         }
     })
-    console.log(post)
+    await prisma.post.delete({
+        where: {
+            id: 2
+        }
+    })
+    await prisma.post.delete({
+        where: {
+            id: 3
+        }
+    }) 
+    await prisma.post.delete({
+        where: {
+            id: 4
+        }
+    })
 }
 
 async function main() {
