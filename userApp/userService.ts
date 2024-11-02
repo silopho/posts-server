@@ -8,13 +8,28 @@ type User = {
     password: string;
 }
 
-function registrationUser(data: any) {
+async function registrationUser(data: any) {
     let status = null
-    if (userRepository.getUserByEmail(data.email) == null && userRepository.getUserByUsername(data.username) == null) {
-        userRepository.createUser(data)
+    if (await userRepository.getUserByEmail(data.email) == null && await userRepository.getUserByUsername(data.username) == null) {
+        await userRepository.createUser(data)
         status = "done"
     }
     return status
 }
 
-export default { registrationUser }
+async function loginUser(data: any) {
+    let status = null
+    const user = await userRepository.getUserByEmail(data.email)
+    if (user) {
+        if (user?.password == data.password) {
+            status = "done"
+        } else {
+            status = "password incorrect"
+        }
+    } else {
+        status = "user not found"
+    }
+    return status
+}
+
+export default { registrationUser, loginUser }

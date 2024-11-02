@@ -5,11 +5,20 @@ function login(req: Request, res: Response){
     res.render('login')
 }
 
-function loginUser(req: Request, res: Response){
-    if (req.cookies.user == req.body.email) {
-        res.send('Login successful')
-    } else {
-        res.send('Invalid')
+async function loginUser(req: Request, res: Response){
+    const user = await userService.loginUser(req.body)
+    if (user == "done") {
+        res.cookie('user', req.body.email)
+        console.log('Успішний вхід')
+        res.sendStatus(200)
+    }
+    if (user == "password incorrect") {
+        console.log('Невірний пароль')
+        res.send("Невірний пароль")
+    }
+    if (user == "user not found") {
+        console.log('Такого користувач не існує')
+        res.send("Такого користувач не існує")
     }
 }
 
@@ -17,15 +26,16 @@ function registration(req: Request, res: Response){
     res.render('registration')
 }
 
-function registrationUser(req: Request, res: Response){
-    const user = userService.registrationUser(req.body)
+async function registrationUser(req: Request, res: Response){
+    const user = await userService.registrationUser(req.body)
     if (user == "done") {
         res.cookie('user', req.body.email)
+        console.log('Зареєстрован новий користувач')
         res.sendStatus(200)
     } else {
+        console.log('Такий користувач вже існує')
         res.send("Такий користувач вже існує")
     }
-    console.log(user)
 }
 
-export default { login, loginUser, registration, registrationUser}
+export default { login, loginUser, registration, registrationUser }

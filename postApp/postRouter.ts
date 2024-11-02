@@ -1,6 +1,7 @@
-import { authMiddleware } from '../middlewares/authMiddleware';
+import loginMiddleware from '../middlewares/loginMiddleware';
 import postController from './postController';
 import express, { Express, Request, Response } from 'express'
+
 const router = express.Router()
 
 router.get('/all', postController.getAllPosts)
