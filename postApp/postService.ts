@@ -1,3 +1,5 @@
+import postRepositiry from './postReposetory'
+
 const posts = [
     {
       id: 1,
@@ -29,22 +31,33 @@ const posts = [
     },
 ];
 
-function getAllPosts () {
-    const context = {
-        posts
-    };
-    return context;
-};
+type Post = {
+  name: string;
+  text: string;
+  author: string;
+  date: string;
+}
 
-function getPostById (id: number) {
+async function getAllPosts () {
+  const context = {
+    posts: postRepositiry.getAllPosts(1)
+  }
+  return context
+}
+
+
+function getPostById(id: number) {
   const context = {
       post: posts[id-1]
-  };
-  return context;
-};
+  }
+  return {
+      context,
+      length: posts.length
+  }
+}
 
 function createPost (data: any) {
-    posts.push(data)
-};
+  posts.push(data)
+}
 
-export { posts, getAllPosts, getPostById, createPost }
+export default { posts, getAllPosts, getPostById, createPost }
