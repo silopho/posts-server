@@ -1,14 +1,18 @@
 import userService from "./userService"
 import express, { Request, Response } from 'express'
+import SECRET_KEY from '../config/token';
+import { sign } from 'jsonwebtoken'
 
 function login(req: Request, res: Response){
     res.render('login')
 }
 
 async function loginUser(req: Request, res: Response){
-    const user = await userService.loginUser(req.body)
+    const data = req.body.email
+    const user = await userService.loginUser(data)
     if (user == "done") {
-        res.cookie('user', req.body.email)
+        const token = sign(data, SECRET_KEY, {expiresIn: '1h'})
+        res.cookie('token', token)
         console.log('Успішний вхід')
         res.sendStatus(200)
     }
@@ -27,9 +31,11 @@ function registration(req: Request, res: Response){
 }
 
 async function registrationUser(req: Request, res: Response){
-    const user = await userService.registrationUser(req.body)
+    const data = req.body
+    const user = await userService.registrationUser(data)
     if (user == "done") {
-        res.cookie('user', req.body.email)
+        const token = sign(data, SECRET_KEY, {expiresIn: '1h'})
+        res.cookie('token', token)
         console.log('Зареєстрован новий користувач')
         res.sendStatus(200)
     } else {
