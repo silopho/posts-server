@@ -2,27 +2,43 @@ import { Prisma } from "@prisma/client"
 import prismaClient from "../prisma/prismaClient";
 
 async function createUser(data: Prisma.UserCreateInput) {
-    await prismaClient.client.user.create({
-        data: data
-    })
+    try {
+        const user = await prismaClient.client.user.create({
+            data: data
+        })
+        return user
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 async function getUserByEmail(email: string) {
-    return await prismaClient.client.user.findFirst({
-        where: { email: email }
-    })
+    try{
+        const user = await prismaClient.user.findUnique({
+            where: {
+                email: email
+            }
+        })
+
+        return user;
+    } catch(error) {
+        console.log(error);
+    }
 }
 
 async function getUserByUsername(username: string) {
-    return await prismaClient.client.user.findFirst({
-        where: { username: username }
-    })
+    try{
+        let user = await prismaClient.user.findUnique({
+            where: {
+                username: username
+            }
+        })
+
+        return user;
+    } catch(error) {
+        console.log(error);
+    }
 }
 
-async function loginUser(data: Prisma.UserWhereInput) {
-    return await prismaClient.client.user.findFirst({
-        where: data
-    })
-}
 
-export default { createUser, getUserByEmail, getUserByUsername, loginUser }
+export default { createUser, getUserByEmail, getUserByUsername }

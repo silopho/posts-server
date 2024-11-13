@@ -8,28 +8,41 @@ type User = {
     password: string;
 }
 
-async function registrationUser(data: any) {
-    let status = null
-    if (await userRepository.getUserByEmail(data.email) == null && await userRepository.getUserByUsername(data.username) == null) {
-        await userRepository.createUser(data)
-        status = "done"
-    }
-    return status
+interface IUserError {
+    status: 'error',
+    message: string
 }
 
-async function loginUser(data: any) {
-    let status = null
+interface IUserSuccess {
+    status: 'success',
+    data: string
+}
+
+interface IUser{
+    id: number,
+    username: string,
+    email: string,
+    password: string
+}
+
+async function registrationUser(data: any): Promise< IUserError | IUserSuccess > {
     const user = await userRepository.getUserByEmail(data.email)
     if (user) {
-        if (user?.password == data.password) {
-            status = "done"
-        } else {
-            status = "password incorrect"
-        }
-    } else {
-        status = "user not found"
+        return { status: 'error', message: 'user already exists'}
     }
-    return status
+    const newUser = await userRepository.createUser(data)
+    if (!newUser) {
+        return {status: 'error', message: 'create error'}
+    }
+    return { status: 'success', data: newUser }
+}
+
+async function loginUser(data: any): Promise< IUserError | IUserSuccess > {
+    const user = await userRepository.getUserByEmail(data.email)
+    if (data.password != user?.password) {
+        return { status: 'error', message: 'password incorrect'}
+    }
+    return {status: 'success', data: user};
 }
 
 export default { registrationUser, loginUser }
