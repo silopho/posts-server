@@ -6,22 +6,28 @@ async function getAllPosts(req: Request, res: Response) {
     res.render('posts', context)
 };
 
-function getPostById(req: Request, res: Response) {
+async function getPostById(req: Request, res: Response) {
     const id: number = Number(req.params.id)
-    const post = postService.getPostById(id)
-    if (id <= post.length) {
+    const post = await postService.getPostById(id)
+    if (post) {
         res.render('product', post)
-    } else{
+    } else {
         res.send("This page does not exist")
     }
 }
 
 
-function createPost(req: Request, res: Response) {
+async function createPost(req: Request, res: Response) {
     const data = req.body
-    data.id = postService.posts.length + 1
-    postService.createPost(data)
-    res.send('send')
+    console.log(data)
+    
+    const result = await postService.createPost(data);
+
+    if (result.status == 'error'){
+        res.send(result.message);
+    } else {
+        res.send(result.data)
+    }
 }
 
 export default { getAllPosts, getPostById, createPost }

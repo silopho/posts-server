@@ -1,31 +1,8 @@
 import userRepository from "./userRepository";
-import prismaClient from "../prisma/prismaClient";
+import { prisma } from "../../prisma/prismaClient";
+import { IError, ISuccess, User } from "../types/types";
 
-type User = {
-    username: string;
-    text: string;
-    email: string;
-    password: string;
-}
-
-interface IUserError {
-    status: 'error',
-    message: string
-}
-
-interface IUserSuccess {
-    status: 'success',
-    data: string
-}
-
-interface IUser{
-    id: number,
-    username: string,
-    email: string,
-    password: string
-}
-
-async function registrationUser(data: any): Promise< IUserError | IUserSuccess > {
+async function registrationUser(data: any): Promise< IError | ISuccess<User> > {
     const user = await userRepository.getUserByEmail(data.email)
     if (user) {
         return { status: 'error', message: 'user already exists'}
@@ -37,9 +14,12 @@ async function registrationUser(data: any): Promise< IUserError | IUserSuccess >
     return { status: 'success', data: newUser }
 }
 
-async function loginUser(data: any): Promise< IUserError | IUserSuccess > {
+async function loginUser(data: any): Promise< IError | ISuccess<User> > {
     const user = await userRepository.getUserByEmail(data.email)
-    if (data.password != user?.password) {
+    if (!user) {
+        return { status: 'error', message: 'user not found'}
+    }
+    if (data.password != user.password) {
         return { status: 'error', message: 'password incorrect'}
     }
     return {status: 'success', data: user};

@@ -1,172 +1,44 @@
 import { PrismaClient } from '@prisma/client';
-import { isAsExpression } from 'typescript';
 
 const prisma = new PrismaClient()
 
-async function createPost(){
-    const post = await prisma.post.create({
-        data: {
-            name: "Test Post",
-            text: "text post",
-            author: "dev",
-            date: "16.10.2024",
-        }
-    })
-    console.log(post)
-}
+const posts = [
+    {
+      id: 1,
+      name: "I`m in San Francisco",
+      text: "I`m finally in San Francisco",
+      date: "02.07.2021"
+    },
+    {
+      id: 2,
+      name: "Had a great day at the Golden Gate",
+      text: "Visited the Golden Gate Bridge, the view is amazing!",
+      date: "27.04.2023"
+    },
+    {
+      id: 3,
+      name: "Exploring Chinatown",
+      text: "Chinatown is so lively, with amazing food and culture!",
+      date: "14.07.2019"
+    },
+    {
+      id: 4,
+      name: "Last day in San Francisco",
+      text: "Time to say goodbye to this amazing city.",
+      date: "09.07.2021"
+    },
+];
 
-async function updatePost() {
-    const post = await prisma.post.update({
-        where: {
-            id: 1
-        },
-        data: {
-            name: "Updated Test Post",
-            text: "updated text post",
-            author: "dev",
-            date: "17.10.2024",
-        }
-    })
-    console.log(post)
-}
-
-async function findPost() {
-    const post = await prisma.post.findUnique({
-        where: {
-            id: 1
-        }
-    })
-    console.log(post)
-}
-
-async function createComment() {
-    const comment = await prisma.comment.create({
-        data: {
-            author: "Dimas",
-            text: "test comment",
-            postId: 1
-        }
-    })
-    console.log(comment)
-}
-
-async function createCommentMany() {
-    const comments = await prisma.comment.createMany({
-        data: [
-            {
-                author: "Dimas",
-                text: "test comment 1",
-                postId: 1
-            },
-            {
-                author: "Miha",
-                text: "test comment 2",
-                postId: 1
-            },
-            {
-                author: "Ivan",
-                text: "test comment 3",
-                postId: 1
-            }
-        ]
-    })
-    console.log(comments)
-}
-
-
-async function findComment() {
-    const comment = await prisma.comment.findUnique({
-        where: {
-            id: 1
-        }
-    })
-}
-
-async function findCommentInfo() {
-    const comment = await prisma.comment.findUnique({
-        where: {
-            id: 1
-        }
-    })
-    const post = await prisma.post.findUnique({
-        where: {
-            id: comment?.postId
-        },
-        include:{}
-    })
-}
-
-async function findPostComments() {
-    const post = await prisma.post.findUnique({
-        where: {
-            id: 1
-        }
-    })
-    const comments = await prisma.comment.findMany({
-        where: {
-            postId: post?.id
-        },
-        include: {}
-    })
-}
-
-async function commentUpdate() {
-    const comment = await prisma.comment.update({
-        where: {
-            id: 1
-        },
-        data: {
-            text: "updated comment text"
-        }
-    })
-    console.log(comment)
-}
-
-async function deleteComment() {
-    const comment = await prisma.comment.delete({
-        where: {
-            id: 1
-        }
-    })
-    console.log(comment)
-}
-
-async function deletePost() {
-    await prisma.comment.deleteMany({})
-    await prisma.post.delete({
-        where: {
-            id: 5
-        }
-    })
-    await prisma.post.delete({
-        where: {
-            id: 2
-        }
-    })
-    await prisma.post.delete({
-        where: {
-            id: 3
-        }
-    }) 
-    await prisma.post.delete({
-        where: {
-            id: 4
-        }
+async function createPosts(){
+    posts.map(async (post) => {
+        await prisma.post.create({
+            data: post
+        });
     })
 }
 
 async function main() {
-    await createPost()
-    await findPost()
-    await updatePost()
-    await createComment()
-    await createCommentMany()
-    await findComment()
-    await findCommentInfo()
-    await findPostComments()
-    await commentUpdate()
-    await deleteComment()
-    await deletePost()
+    await createPosts()
 }
 
 main().then(() => {
