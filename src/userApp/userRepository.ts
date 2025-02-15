@@ -1,9 +1,9 @@
 import { Prisma } from "@prisma/client"
-import prismaClient from "../prisma/prismaClient";
+import { prisma }  from "../../prisma/prismaClient";
 
 async function createUser(data: Prisma.UserCreateInput) {
     try {
-        const user = await prismaClient.client.user.create({
+        const user = await prisma.user.create({
             data: data
         })
         return user
@@ -13,13 +13,12 @@ async function createUser(data: Prisma.UserCreateInput) {
 }
 
 async function getUserByEmail(email: string) {
-    try{
-        const user = await prismaClient.user.findUnique({
+    try {
+        const user = await prisma.user.findFirst({
             where: {
                 email: email
             }
         })
-
         return user;
     } catch(error) {
         console.log(error);
@@ -28,7 +27,7 @@ async function getUserByEmail(email: string) {
 
 async function getUserByUsername(username: string) {
     try{
-        let user = await prismaClient.user.findUnique({
+        let user = await prisma.user.findFirst({
             where: {
                 username: username
             }

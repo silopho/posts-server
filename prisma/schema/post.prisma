@@ -3,8 +3,8 @@ model Post {
   name String
   text String
 
-  userID Int
-  User   User @relation(fields: [userID], references: [id])
+  userID Int?
+  User   User? @relation(fields: [userID], references: [id])
 
   date     String
   comments Comment[]

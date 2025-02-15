@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from 'express'
-import postRouter from './postApp/postRouter'
-import userRouter from './userApp/userRouter'
+import postRouter from './src/postApp/postRouter'
+import userRouter from './src/userApp/userRouter'
 import cookieParser from 'cookie-parser'
-import loginMiddleware from './middlewares/loginMiddleware'
+import loginMiddleware from './src/middlewares/loginMiddleware'
 
 const app: Express = express()
 
