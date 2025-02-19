@@ -2,6 +2,8 @@ model Post {
   id   Int    @id @default(autoincrement())
   name String
   text String
+  image String?
+  category String
 
   userID Int?
   User   User? @relation(fields: [userID], references: [id])
