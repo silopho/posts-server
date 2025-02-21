@@ -1,11 +1,13 @@
 model Post {
-  id   Int    @id @default(autoincrement())
-  name String
-  text String
+  id    Int     @id @default(autoincrement())
+  name  String
+  text  String
+  image String?
+  date  String
 
-  userID Int?
+  tagId Int
+  tag   Tag @relation(fields: [tagId], references: [id])
+
+  userID Int
   User   User? @relation(fields: [userID], references: [id])
-
-  date     String
-  comments Comment[]
 }

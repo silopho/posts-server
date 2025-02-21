@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client'
 import { prisma } from '../../prisma/prismaClient'
-import { IError, ISuccess, Post } from '../types/types';
+import { IError, ISuccess, IPost } from '../types/types';
 
 async function getAllPosts() {
     try{
@@ -34,7 +34,7 @@ async function getPostById(id: number){
     }
 }
 
-async function createPost(data: Post){
+async function createPost(data: IPost){
     let post = await prisma.post.create({
         data: data
     })

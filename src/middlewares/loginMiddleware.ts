@@ -1,7 +1,6 @@
-import {Request, Response, NextFunction} from 'express';
-import userRepository from '../userApp/userRepository';
-import { verify } from 'jsonwebtoken';
-import SECRET_KEY from '../config/token';
+import {Request, Response, NextFunction} from 'express'
+import { verify } from 'jsonwebtoken'
+import SECRET_KEY from '../config/token'
 
 async function loginMiddleware(req: Request, res: Response, next: NextFunction) {
     const cookies = req.cookies
