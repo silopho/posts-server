@@ -1,14 +1,19 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client"
 
 export interface IError {
-    status: 'error';
-    message: string;
+    status: 'error'
+    message: string
 }
 
 export interface ISuccess<T> {
-    status: 'success';
-    data: T;
+    status: 'success'
+    data: T
 }
 
-export type User = Prisma.UserGetPayload<{}>
-export type Post = Prisma.PostGetPayload<{}>
+export type IUser = Prisma.UserGetPayload<{}>
+export type ICreateUser = Prisma.UserCreateInput
+
+export type IPost = Prisma.PostGetPayload<{}>
+export type ICreatePost = Prisma.UserCreateInput
+
+export type ITag = Prisma.TagGetPayload<{}>

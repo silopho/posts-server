@@ -1,20 +1,26 @@
-import userRepository from "./userRepository";
-import { prisma } from "../../prisma/prismaClient";
-import { IError, ISuccess, User } from "../types/types";
+import userRepository from "./userRepository"
+import { ICreatePost, ICreateUser, IError, ISuccess, IUser } from "../types/types"
 
-async function registrationUser(data: any): Promise< IError | ISuccess<User> > {
-    const user = await userRepository.getUserByEmail(data.email)
-    if (user) {
-        return { status: 'error', message: 'user already exists'}
+async function registrationUser(data: ICreateUser): Promise< IError | ISuccess<IUser> > {
+    const userByEmail = await userRepository.getUserByEmail(data.email);
+    if (userByEmail) {
+        return { status: "error", message: "email already exists" };
     }
-    const newUser = await userRepository.createUser(data)
+
+    const userByUsername = await userRepository.getUserByUsername(data.username);
+    if (userByUsername) {
+        return { status: "error", message: "username already exists" };
+    }
+
+    const newUser = await userRepository.createUser(data);
     if (!newUser) {
-        return {status: 'error', message: 'create error'}
+        return { status: "error", message: "create error" };
     }
-    return { status: 'success', data: newUser }
+
+    return { status: "success", data: newUser };
 }
 
-async function loginUser(data: any): Promise< IError | ISuccess<User> > {
+async function loginUser(data: ICreatePost): Promise< IError | ISuccess<IUser> > {
     const user = await userRepository.getUserByEmail(data.email)
     if (!user) {
         return { status: 'error', message: 'user not found'}

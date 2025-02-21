@@ -1,12 +1,9 @@
-import userControllers from './userController';
-import { Router } from 'express';
+import userControllers from './userController'
+import { Router } from 'express'
 
-const router = Router();
+const router = Router()
 
 router.post('/login', userControllers.loginUser)
-router.get('/login', userControllers.login)
-
-router.post('/registration', userControllers.registrationUser)
-router.get('/registration', userControllers.registration)
+router.post('/register', userControllers.registrationUser)
 
 export default { router }

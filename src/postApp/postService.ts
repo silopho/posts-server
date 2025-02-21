@@ -1,7 +1,7 @@
-import { IError, ISuccess, Post } from '../types/types';
-import postRepositiry from './postReposetory'
+import { IError, ISuccess, IPost } from '../types/types';
+import postRepositiry from './postRepository'
 
-async function getAllPosts(): Promise< IError | ISuccess<Post[] > > {
+async function getAllPosts(): Promise< IError | ISuccess<IPost[] > > {
   const context = await postRepositiry.getAllPosts()
   if (!context) {
     return { status: 'error', message: 'posts not found'}
@@ -9,9 +9,7 @@ async function getAllPosts(): Promise< IError | ISuccess<Post[] > > {
   return { status: 'success', data: context }
 }
 
-
-
-async function getPostById(id: number): Promise< IError | ISuccess<Post> > {
+async function getPostById(id: number): Promise< IError | ISuccess<IPost> > {
   const context = await postRepositiry.getPostById(id)
   if (!context) {
     return { status: 'error', message: 'post not found'}
@@ -19,8 +17,7 @@ async function getPostById(id: number): Promise< IError | ISuccess<Post> > {
   return { status: 'success', data: context }
 }
 
-
-async function createPost(data: Post): Promise< IError | ISuccess<Post> >{
+async function createPost(data: IPost): Promise< IError | ISuccess<IPost> >{
   const context = await postRepositiry.createPost(data)
   if (!context) {
     return { status: 'error', message: 'post not found'}
