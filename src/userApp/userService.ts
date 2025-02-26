@@ -34,7 +34,6 @@ async function loginUser(data: ICreatePost): Promise< IError | ISuccess<IUser> >
         return { status: 'error', message: 'user not found'}
     }
 
-
     const compared = await compare(data.password, user.password)
     if (!compared) {
         return { status: 'error', message: 'password incorrect'}
