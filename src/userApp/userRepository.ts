@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client"
 import { prisma }  from "../../prisma/prismaClient"
-
+// этот тип лучше перенести в types
 async function createUser(data: Prisma.UserCreateInput) {
     try {
         const user = await prisma.user.create({

@@ -1,6 +1,7 @@
 import userRepository from "./userRepository"
 import { ICreatePost, ICreateUser, IError, ISuccess, IUser } from "../types/types"
 
+// Добавь подпись токена и хеширование пароля
 async function registrationUser(data: ICreateUser): Promise< IError | ISuccess<IUser> > {
     const userByEmail = await userRepository.getUserByEmail(data.email);
     if (userByEmail) {
@@ -30,5 +31,4 @@ async function loginUser(data: ICreatePost): Promise< IError | ISuccess<IUser> >
     }
     return {status: 'success', data: user};
 }
-
 export default { registrationUser, loginUser }

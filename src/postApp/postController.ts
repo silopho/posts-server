@@ -1,4 +1,5 @@
 import postService from './postService'
+// Импорт не используется, нужно убрать
 import express, { Express, Request, Response } from 'express';
 
 async function getAllPosts(req: Request, res: Response) {

@@ -9,7 +9,7 @@ export interface ISuccess<T> {
     status: 'success'
     data: T
 }
-
+// специфические типы лучше перенести по приложениям
 export type IUser = Prisma.UserGetPayload<{}>
 export type ICreateUser = Prisma.UserCreateInput
 

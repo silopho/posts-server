@@ -20,7 +20,7 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 app.use('/static/', express.static('./static/'))
-
+// Отличная идея с доставанием из объекта router!
 app.use('/', userRouter.router)
 
 app.use('/post', postRouter.router)
@@ -30,7 +30,7 @@ app.use('/api', postRouterApi.router)
 app.get("/", loginMiddleware, (req: Request, res: Response) => {
   res.render("index")
 })
-
+// этот можно убрать
 app.get("/user", (req: Request, res: Response) => {
   res.render("user")
 })

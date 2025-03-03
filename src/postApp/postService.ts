@@ -1,7 +1,8 @@
 import { IError, ISuccess, IPost } from '../types/types';
 import postRepositiry from './postRepository'
-
+// следи за табуляциями, где то 4, где то 2
 async function getAllPosts(): Promise< IError | ISuccess<IPost[] > > {
+    // это не контекст(result | posts)
   const context = await postRepositiry.getAllPosts()
   if (!context) {
     return { status: 'error', message: 'posts not found'}
