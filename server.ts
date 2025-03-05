@@ -2,11 +2,12 @@ import express, { Express, Request, Response } from 'express'
 import postRouter from './src/postApp/postRouter'
 import userRouter from './src/userApp/userRouter'
 import cookieParser from 'cookie-parser'
-import loginMiddleware from './src/middlewares/loginMiddleware'
 import cors from 'cors'
 import postRouterApi from './src/postApp/postRouterApi'
+import dotenv from 'dotenv'
 
 const app: Express = express()
+dotenv.config()
 
 const PORT = 8000
 const HOST = "localhost"

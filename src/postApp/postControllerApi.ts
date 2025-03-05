@@ -2,14 +2,14 @@ import postService from './postService'
 import { Request, Response } from 'express';
 
 async function getAllPosts(req: Request, res: Response) {
-    const posts = await postService.getAllPosts()
-    res.json(posts)
+    const result = await postService.getAllPosts()
+    res.json(result)
 }
 
 async function getPostById(req: Request, res: Response) {
     const id: number = Number(req.params.id)
-    const post = await postService.getPostById(id)
-    res.json(post)
+    const result = await postService.getPostById(id)
+    res.json(result)
 }
 
 export default { getAllPosts, getPostById }

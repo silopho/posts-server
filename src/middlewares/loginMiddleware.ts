@@ -1,16 +1,32 @@
-import {Request, Response, NextFunction} from 'express'
+import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
-import SECRET_KEY from '../config/token'
+import { SECRET_KEY } from '../config/token'
 
-async function loginMiddleware(req: Request, res: Response, next: NextFunction) {
-    const cookies = req.cookies
-    if (cookies.token){
-        const token = verify(cookies.token, SECRET_KEY)
-        res.locals.user = token
-        next()
-    } else {
-        res.sendStatus(401)
-    }
+interface IToken {
+    iat: number
+    exp: number
+    id: number
 }
 
-export default loginMiddleware
+export function authTokenMiddleware(req: Request, res: Response, next: NextFunction) {
+    const authorization = req.headers.authorization
+
+    if (!authorization) {
+        res.json({status: 'error', message: 'authorization required'})
+        return
+    }
+
+    const [type, token] = authorization.split(' ')
+    if (type !== 'Bearer' || !token) {
+        res.json({status: 'error', message: 'authorization is invalid'})
+        return
+    }
+    
+    try {
+        const decodedToken = verify(token, SECRET_KEY) as IToken
+        res.locals.userId = decodedToken.id
+        next()
+    } catch (error) {
+        res.json({status: 'error', message: 'token is invalid'})
+    }
+}
