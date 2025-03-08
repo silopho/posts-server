@@ -1,12 +1,13 @@
 import express, { Express, Request, Response } from 'express'
-import postRouter from './src/postApp/postRouter'
-import userRouter from './src/userApp/userRouter'
+import postRouter from './postApp/postRouter'
+import userRouter from './userApp/userRouter'
 import cookieParser from 'cookie-parser'
-import loginMiddleware from './src/middlewares/loginMiddleware'
 import cors from 'cors'
-import postRouterApi from './src/postApp/postRouterApi'
+import postRouterApi from './postApp/postRouterApi'
+import dotenv from 'dotenv'
 
 const app: Express = express()
+dotenv.config()
 
 const PORT = 8000
 const HOST = "localhost"
@@ -31,9 +32,6 @@ app.get("/", loginMiddleware, (req: Request, res: Response) => {
   res.render("index")
 })
 
-app.get("/user", (req: Request, res: Response) => {
-  res.render("user")
-})
 
 app.listen(PORT, HOST, () => {
   console.log(`Server is running on http://${HOST}:${PORT}`)

@@ -1,7 +1,8 @@
-import { Prisma } from "@prisma/client"
 import { prisma }  from "../../prisma/prismaClient"
 
-async function createUser(data: Prisma.UserCreateInput) {
+import { ICreatePost } from "../postApp/postTypes"
+
+async function createUser(data: ICreatePost){
     try {
         const user = await prisma.user.create({
             data: data
@@ -38,4 +39,23 @@ async function getUserByUsername(username: string) {
     }
 }
 
-export default { createUser, getUserByEmail, getUserByUsername }
+async function getUserById(id: number){
+    try {
+        let user = await prisma.user.findUnique({
+            where: {
+                id: id
+            },
+            select: {
+                id: true,
+                email: true,
+                username: true,
+                role: true
+            }
+        })
+        return user;
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+export default { createUser, getUserByEmail, getUserByUsername, getUserById }
