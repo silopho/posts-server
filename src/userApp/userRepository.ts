@@ -1,7 +1,8 @@
-import { Prisma } from "@prisma/client"
 import { prisma }  from "../../prisma/prismaClient"
 
-async function createUser(data: Prisma.UserCreateInput) {
+import { ICreatePost } from "../postApp/postTypes"
+
+async function createUser(data: ICreatePost){
     try {
         const user = await prisma.user.create({
             data: data

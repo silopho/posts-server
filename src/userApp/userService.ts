@@ -3,7 +3,8 @@ import { compare, hash } from "bcryptjs"
 import { sign } from "jsonwebtoken"
 import { SECRET_KEY } from "../config/token";
 
-import { ICreatePost, ICreateUser, IError, ISuccess, IUser } from "../types/types"
+import { IError, ISuccess } from "../types/types"
+import { ICreateUser, IUser } from "./userTypes"
 
 async function registrationUser(data: ICreateUser): Promise< IError | ISuccess<string> > {
     const userByEmail = await userRepository.getUserByEmail(data.email)
@@ -34,7 +35,7 @@ async function registrationUser(data: ICreateUser): Promise< IError | ISuccess<s
     return {status: 'success', data: token};
 }
 
-async function loginUser(data: ICreatePost): Promise< IError | ISuccess<string> > {
+async function loginUser(data: ICreateUser): Promise< IError | ISuccess<string> > {
     const user = await userRepository.getUserByEmail(data.email)
     console.log(user)
 

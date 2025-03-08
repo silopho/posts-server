@@ -1,5 +1,5 @@
 import postService from './postService'
-import express, { Express, Request, Response } from 'express';
+import { Request, Response } from 'express';
 
 async function getAllPosts(req: Request, res: Response) {
     const context = await postService.getAllPosts()

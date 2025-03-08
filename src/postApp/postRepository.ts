@@ -1,18 +1,13 @@
-import { Prisma, PrismaClient } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import { prisma } from '../../prisma/prismaClient'
-import { IError, ISuccess, IPost } from '../types/types';
+import { IPost } from '../types/types';
 
 async function getAllPosts() {
-    try{
+    try {
         let posts = await prisma.post.findMany({})
         return posts
-    } catch(err) {
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == 'P2002'){
-                console.log(err.message);
-                throw err;
-            }
-        }
+    } catch(error) {
+        console.log(error)
     }
 }
 
@@ -24,21 +19,20 @@ async function getPostById(id: number){
             }
         })
         return post
-    } catch(err) {
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == 'P2002'){
-                console.log(err.message);
-                throw err;
-            }
-        }
+    } catch(error) {
+        console.log(error)
     }
 }
 
 async function createPost(data: IPost){
-    let post = await prisma.post.create({
-        data: data
-    })
-    return post
+    try {
+        let post = await prisma.post.create({
+            data: data
+        })
+        return post
+    } catch(error) {
+        console.log(error)
+    }
 }  
 
 export default { getAllPosts, getPostById, createPost }
