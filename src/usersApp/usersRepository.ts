@@ -1,6 +1,6 @@
 import { prisma }  from "../../prisma/prismaClient"
 
-import { ICreatePost } from "../postApp/postTypes"
+import { ICreatePost } from "../postsApp/postsTypes"
 
 async function createUser(data: ICreatePost){
     try {
@@ -26,19 +26,6 @@ async function getUserByEmail(email: string) {
     }
 }
 
-async function getUserByUsername(username: string) {
-    try{
-        let user = await prisma.user.findUnique({
-            where: {
-                username: username
-            }
-        })
-        return user
-    } catch(error) {
-        console.log(error)
-    }
-}
-
 async function getUserById(id: number){
     try {
         let user = await prisma.user.findUnique({
@@ -52,10 +39,10 @@ async function getUserById(id: number){
                 role: true
             }
         })
-        return user;
+        return user
     } catch(error) {
         console.log(error)
     }
 }
 
-export default { createUser, getUserByEmail, getUserByUsername, getUserById }
+export default { createUser, getUserByEmail, getUserById }

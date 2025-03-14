@@ -1,20 +1,15 @@
-import userRepository from "./userRepository"
+import userRepository from "./usersRepository"
 import { compare, hash } from "bcryptjs"
 import { sign } from "jsonwebtoken"
 import { SECRET_KEY } from "../config/token";
 
 import { IError, ISuccess } from "../types/types"
-import { ICreateUser, IUser } from "./userTypes"
+import { ICreateUser, IUser } from "./usersTypes"
 
 async function registrationUser(data: ICreateUser): Promise< IError | ISuccess<string> > {
     const userByEmail = await userRepository.getUserByEmail(data.email)
     if (userByEmail) {
         return { status: "error", message: "email already exists" }
-    }
-
-    const userByUsername = await userRepository.getUserByUsername(data.username)
-    if (userByUsername) {
-        return { status: "error", message: "username already exists" }
     }
 
     const hashedPassword: string = await hash(data.password, 10)

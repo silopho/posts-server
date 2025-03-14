@@ -23,7 +23,11 @@ async function seed(){
       text: "I`m finally in San Francisco",
       date: "02.07.2021",
       userID: 1,
-      tagId: 1
+      tags: {
+        connect: {
+          name: "Travel"
+        }
+      }
     }
   })
 }

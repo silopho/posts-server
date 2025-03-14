@@ -4,7 +4,7 @@
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "npx nodemon ./server.ts",
+    "server": "npx nodemon src/server.ts",
     "prisma:seed": "ts-node prisma/seed.ts"
   },
   "author": "",

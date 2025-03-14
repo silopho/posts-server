@@ -1,5 +1,5 @@
 import { authTokenMiddleware } from '../middlewares/loginMiddleware'
-import userControllers from './userController'
+import userControllers from './usersController'
 import { Router } from 'express'
 
 const router = Router()

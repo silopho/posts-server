@@ -5,9 +5,9 @@ model Post {
   image String?
   date  String
 
-  tagId Int
-  tag   Tag @relation(fields: [tagId], references: [id])
-
   userID Int
-  User   User? @relation(fields: [userID], references: [id])
+  user   User? @relation(fields: [userID], references: [id])
+
+  tags    Tag[]
+  comment Comment[]
 }
