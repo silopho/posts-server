@@ -1,5 +1,7 @@
-import { IError, ISuccess, IPost } from '../types/types';
-import postRepositiry from './postRepository'
+import postRepositiry from './postsRepository'
+
+import { IError, ISuccess } from '../types/types';
+import { IPost }  from './postsTypes'
 
 async function getAllPosts(): Promise< IError | ISuccess<IPost[]> > {
   const posts = await postRepositiry.getAllPosts()

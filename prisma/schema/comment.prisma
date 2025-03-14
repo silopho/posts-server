@@ -1,0 +1,10 @@
+model Comment {
+  id   Int    @id @default(autoincrement())
+  text String
+
+  userID Int
+  user   User? @relation(fields: [userID], references: [id])
+
+  postID Int
+  post   Post? @relation(fields: [postID], references: [id])
+}

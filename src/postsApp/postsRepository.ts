@@ -1,10 +1,14 @@
-import { Prisma } from '@prisma/client'
 import { prisma } from '../../prisma/prismaClient'
-import { IPost } from '../types/types';
+import { IPost } from './postsTypes';
 
 async function getAllPosts() {
     try {
-        let posts = await prisma.post.findMany({})
+        let posts = await prisma.post.findMany({
+            include: {
+                tags: true,
+                user: true
+            }
+        })
         return posts
     } catch(error) {
         console.log(error)

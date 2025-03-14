@@ -1,4 +1,4 @@
-import userService from "./userService"
+import userService from "./usersService"
 import { Request, Response } from 'express'
 
 async function loginUser(req: Request, res: Response){

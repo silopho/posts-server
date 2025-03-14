@@ -1,12 +1,13 @@
-import express, { Express, Request, Response } from 'express'
-import postRouter from './postApp/postRouter'
-import userRouter from './userApp/userRouter'
+import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-import postRouterApi from './postApp/postRouterApi'
 import dotenv from 'dotenv'
 
-const app: Express = express()
+import userRouter from './usersApp/usersRouter'
+import postRouter from './postsApp/postsRouter'
+import tagsRouter from './tagsApp/tagsRouter'
+
+const app: express.Express = express()
 dotenv.config()
 
 const PORT = 8000
@@ -18,20 +19,16 @@ app.set('views', './templates')
 app.use(cors({
   origin: ['http://localhost:3000']
 }))
+
 app.use(express.json())
 app.use(cookieParser())
 app.use('/static/', express.static('./static/'))
 
 app.use('/', userRouter.router)
 
-app.use('/post', postRouter.router)
-
-app.use('/api', postRouterApi.router)
-
-app.get("/", loginMiddleware, (req: Request, res: Response) => {
-  res.render("index")
-})
-
+app.use('/api/posts', postRouter.router)
+app.use('/api/tags', tagsRouter.router)
+app.use('/api/users', userRouter.router)
 
 app.listen(PORT, HOST, () => {
   console.log(`Server is running on http://${HOST}:${PORT}`)

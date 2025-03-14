@@ -1,4 +1,4 @@
-import postService from './postService'
+import postService from './postsService'
 import { Request, Response } from 'express';
 
 async function getAllPosts(req: Request, res: Response) {
